@@ -70,11 +70,11 @@ def _init_clients(libs):
 def _make_graph(libs):
     graph = Digraph()
     for lib in libs:
-        graph.node(lib.name)
+        graph.node(lib.name, weight=str(len(lib.dependencies)))
 
-    for a_lib in libs:
-        for b_lib in a_lib.dependencies:
-            graph.edge(a_lib.name, b_lib)
+    for lib in libs:
+        for dependency in lib.dependencies:
+            graph.edge(lib.name, dependency)
 
     return graph
 
